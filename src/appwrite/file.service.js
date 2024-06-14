@@ -3,14 +3,13 @@ import conf from "../conf/conf";
 
 export class FileService {
   client = new Client();
-  bucket; //storage
+  dataBases
   constructor() {
     this.client
       .setEndpoint(conf.appWriteUrl)
       .setProject(conf.appWriteProjectId);
 
     this.dataBases = new Databases(this.client);
-    this.bucket = new Storage(this.client);
   }
 
   async uploadFile(fileId = ID.unique(), file) {
