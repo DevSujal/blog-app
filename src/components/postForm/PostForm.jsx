@@ -4,7 +4,6 @@ import { Button, Input, SelectBtn, RTE } from "../index";
 import dataBaseService from "../../appwrite/config.service";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import authService from "../../appwrite/auth.service";
 import fileService from "../../appwrite/file.service";
 
 function PostForm({ post }) {
