@@ -7,12 +7,11 @@ import { useNavigate } from 'react-router-dom'
 export default function Protected({children, authentication = true}) {
     const [loading, setLoading] = useState()
     const navigate = useNavigate()
-    const authStatus = useSelector((state) => state.auth.status)
+    const authStatus = useSelector((state) => state.status)
     useEffect(() => {
-
         if(authentication && authStatus !== authentication) {
             navigate("/login")
-        }else if(!authentication && authStatus !== authentication){
+        }else if(authentication && authStatus !== authentication){
             navigate("/")
         }
         setLoading(false)

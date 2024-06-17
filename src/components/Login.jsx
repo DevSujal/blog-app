@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth.service";
 import { login as authLogin } from "../features/authSlice";
-import { Input, Logo } from "./index";
+import { Button, Input, Logo } from "./index";
 function Login() {
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Login() {
       if (session) {
         const userData = await authService.getCurrectUser();
         if (userData) dispatch(authLogin({ userData }));
-        navigate("/");
+        else navigate("/");
       }
     } catch (error) {
       setError(error.message);

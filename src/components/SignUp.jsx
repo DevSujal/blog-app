@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { login } from "../appwrite/auth.service";
-import { Button, Input } from "./index";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input, Logo } from "./index";
+import { login } from "../features/authSlice";
 function SignUp() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -12,7 +12,6 @@ function SignUp() {
 
   const signUp = async (data) => {
     setError("");
-
     try {
       const session = await authService.createAccount(data);
       if (session) {
