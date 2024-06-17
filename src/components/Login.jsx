@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth.service";
 import { login as authLogin } from "../features/authSlice";
@@ -11,17 +11,17 @@ function Login() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
-
-  const login = async (data) => {
+ const status = useSelector(state => state.userData)
+  const login = async (data) => { 
     setError("");
-
+    console.log(status);
     try {
       const session = await authService.login(data);
 
       if (session) {
         const userData = await authService.getCurrectUser();
         if (userData) dispatch(authLogin({ userData }));
-        else navigate("/");
+        navigate("/");
       }
     } catch (error) {
       setError(error.message);

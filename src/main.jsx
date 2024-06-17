@@ -12,7 +12,7 @@ import {
   createRoutesFromChildren,
 } from "react-router-dom";
 import { AuthLayout } from "./components/index.js";
-import { AddPost, AllPosts, EditPost, Home, Login, SignUp } from "./pages";
+import { AddPost, AllPosts, EditPost, Home, Login, Post, SignUp } from "./pages";
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="all-posts"
+        path="all-post"
         element={
           <AuthLayout authentication>
             <AllPosts />
@@ -58,6 +58,7 @@ const router = createBrowserRouter(
           </AuthLayout>
         }
       />
+      <Route path = "post/:slug" element = {<Post />}/>
     </Route>
   )
 );

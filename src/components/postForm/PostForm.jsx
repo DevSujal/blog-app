@@ -11,13 +11,13 @@ function PostForm({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post.slug || "",
-        content: post.content || "",
-        status: post.status || "",
+        slug: post?.slug || "",
+        content: post?.content || "",
+        status: post?.status || "",
       },
     });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) => state.userData);
 
   const submit = async (data) => {
     if (post) {
@@ -57,11 +57,7 @@ function PostForm({ post }) {
 
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string")
-      return value
-        .trim()
-        .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
+      return value.trim().toLowerCase().replaceAll(" ", "-");
 
     return "";
   });
@@ -91,6 +87,7 @@ function PostForm({ post }) {
         />
         <Input
           label="Slug :"
+          disabled
           placeholder="Slug"
           className="mb-4"
           {...register("slug", { required: true })}
@@ -124,13 +121,14 @@ function PostForm({ post }) {
             />
           </div>
         )}
-        <Select
+        <SelectBtn
           options={["active", "inactive"]}
           label="Status"
           className="mb-4"
           {...register("status", { required: true })}
         />
         <Button
+          onSubmit={handleSubmit(submit)}
           type="submit"
           bgColor={post ? "bg-green-500" : undefined}
           className="w-full"

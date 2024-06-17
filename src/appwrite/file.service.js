@@ -1,18 +1,18 @@
-import { Client, Databases, ID, Storage } from "appwrite";
+import { Client, ID, Storage } from "appwrite";
 import conf from "../conf/conf";
 
 export class FileService {
   client = new Client();
-  dataBases
+  bucket
   constructor() {
     this.client
       .setEndpoint(conf.appWriteUrl)
       .setProject(conf.appWriteProjectId);
 
-    this.dataBases = new Databases(this.client);
+    this.bucket = new Storage(this.client);
   }
 
-  async uploadFile(fileId = ID.unique(), file) {
+  async uploadFile(file, fileId = ID.unique()) {
     try {
       return await this.bucket.createFile(conf.appWriteBucketId, fileId, file);
     } catch (error) {
@@ -49,6 +49,7 @@ export class FileService {
   }
 
   async getFilePreview(fileId) {
+    console.log(fileId);
     try {
       return await this.bucket.getFilePreview(conf.appWriteBucketId, fileId);
     } catch (error) {

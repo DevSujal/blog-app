@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Input, Logo } from "./index";
 import { login } from "../features/authSlice";
+import authService from "../appwrite/auth.service";
 function SignUp() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -17,10 +18,11 @@ function SignUp() {
       if (session) {
         const userData = await authService.getCurrectUser();
 
-        if (userData) dispatch(login(userData));
+        if (userData) dispatch(login({userData}));
         navigate("/");
       }
     } catch (error) {
+      console.log(error);
       setError(error.message);
     }
   };

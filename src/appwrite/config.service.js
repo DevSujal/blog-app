@@ -1,15 +1,15 @@
-import { Client, Storage, Query } from "appwrite";
+import { Client, Storage, Query, Databases } from "appwrite";
 import conf from "../conf/conf";
 
 export class DatabasesService {
   client = new Client();
-  bucket;
+  dataBases;
   constructor() {
     this.client
       .setEndpoint(conf.appWriteUrl)
       .setProject(conf.appWriteProjectId);
 
-    this.bucket = new Storage(this.client);
+    this.dataBases = new Databases(this.client);
   }
 
   async createPost({ title, slug, featuredImage, userId, status, content }) {
@@ -75,7 +75,7 @@ export class DatabasesService {
       return null;
     }
   }
-  async getAllPost(queries = [Query.equal("status", queries)]) {
+  async getAllPost(queries = [Query.equal("status", "active")]) {
     try {
       return await this.dataBases.listDocuments(
         conf.appWriteDatabaseId,

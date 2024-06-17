@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import dataBaseService from "../appwrite/config.service";
-import { Container } from "postcss";
+import  Container  from "../components/Container/Container";
 import { PostCard } from "../components";
 function AllPosts() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     dataBaseService.getAllPost()
