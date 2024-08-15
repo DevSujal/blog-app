@@ -7,14 +7,13 @@ import store from "./store/store.js";
 import {
   Route,
   RouterProvider,
-  createBrowserRouter,
   createHashRouter,
   createRoutesFromChildren,
 } from "react-router-dom";
 import { AuthLayout } from "./components/index.js";
 import { AddPost, AllPosts, EditPost, Home, Login, Post, SignUp } from "./pages";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromChildren(
     <Route path="/" element={<App />}>
       <Route path="" element={<Home />} />
